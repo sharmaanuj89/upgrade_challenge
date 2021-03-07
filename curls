@@ -1,0 +1,7 @@
+curl -v -X GET 'http://127.0.0.1:8080/getAvailabilitySchedule' | json_pp
+
+curl -v -X POST 'http://127.0.0.1:8080/createReservation' --header 'Content-Type: application/json' --data-raw '{"firstName" : "anuj", "lastName" : "sharma", "email" : "anuj@gmail.com", "startDate" : "2021-03-26", "durationInDays": 2}'
+
+curl -v -X POST 'http://127.0.0.1:8080/cancelReservation' --header 'Content-Type: application/json'  --data-raw '{"reservationId" : 3}'
+
+curl -v -X POST 'http://127.0.0.1:8080/modifyReservation' --header 'Content-Type: application/json'  --data-raw '{"reservationId" : 3, "startDate" : "2021-03-26", "durationInDays": 2}'
