@@ -1,11 +1,17 @@
 Project can be setup by calling following the below steps:-
 
 a) mvn clean package
+
 b) java -jar target/upgrade-0.0.1-SNAPSHOT.jar
+
 
 Project makes use of the h2 database, the console of which can be accessed by the below link:-
 
 http://127.0.0.1:8080/h2-console
+
+Username:-  sa
+Password:-  sa
+
 
 There are four endpoints:-
 
