@@ -1,6 +1,6 @@
 package com.campsite.exception;
 
-public class CannotModifyAlreadyCancelledReservation extends RuntimeException{
+public class CannotModifyAlreadyCancelledReservation extends RuntimeException {
 
 	/**
 	 * 

@@ -11,4 +11,3 @@ public class StartDateShouldBeBeforeEndDateException extends RuntimeException {
 	}
 
 }
-

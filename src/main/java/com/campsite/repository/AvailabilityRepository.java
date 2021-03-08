@@ -18,7 +18,7 @@ public interface AvailabilityRepository extends CrudRepository<CampsiteAvailabil
 	List<CampsiteAvailability> getAllBetweenDates(
 			@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
 			@Param("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate);
-	
+
 	@Query(value = "select * from campsite_availability where reservation_id is null AND availability_date between :startDate AND :endDate", nativeQuery = true)
 	List<CampsiteAvailability> getAllBetweenDatesNotBindedToAnyReservation(
 			@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,

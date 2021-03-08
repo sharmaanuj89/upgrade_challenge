@@ -33,9 +33,10 @@ public class CampsiteController {
 			@RequestParam(required = false) LocalDate endDate) {
 		return ResponseEntity.ok().body(campsiteService.findExistingScehdules(startDate, endDate));
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST, value = "/createReservation", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<CreateReservationResponse> createReservation(@RequestBody ReservationCreationRequest reservationCreationRequest) {
+	public ResponseEntity<CreateReservationResponse> createReservation(
+			@RequestBody ReservationCreationRequest reservationCreationRequest) {
 		Reservation reservation = campsiteService.createReservation(reservationCreationRequest);
 		CreateReservationResponse response = new CreateReservationResponse();
 		response.setReservationId(reservation.getId());
@@ -43,13 +44,15 @@ public class CampsiteController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/modifyReservation")
-	public ResponseEntity<String> modifyExistingReservation(@RequestBody ReservationModificationRequest reservationModificationRequest) {
+	public ResponseEntity<String> modifyExistingReservation(
+			@RequestBody ReservationModificationRequest reservationModificationRequest) {
 		campsiteService.modifyReservation(reservationModificationRequest);
 		return ResponseEntity.ok().build();
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/cancelReservation")
-	public ResponseEntity<String> cancelExistingReservation(@RequestBody ReservationCancellationRequest reservationCancellationRequest) {
+	public ResponseEntity<String> cancelExistingReservation(
+			@RequestBody ReservationCancellationRequest reservationCancellationRequest) {
 		campsiteService.cancelReservation(reservationCancellationRequest.getReservationId());
 		return ResponseEntity.ok().build();
 	}

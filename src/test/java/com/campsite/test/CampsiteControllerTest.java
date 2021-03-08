@@ -74,11 +74,9 @@ public class CampsiteControllerTest {
 		reservation.setId(1L);
 		Mockito.when(campsiteService.createReservation(Mockito.anyObject())).thenReturn(reservation);
 
-		this.mockMvc
-			.perform(post("/createReservation")
-			.contentType(MediaType.APPLICATION_JSON_VALUE)
-			.content("{\"firstName\" : \"anuj\", \"lastName\" : \"sharma\", \"email\" : \"anuj@gmail.com\", \"startDate\" : \"2021-03-26\", \"durationInDays\": 2}"))
-			.andExpect(status().isOk());
+		this.mockMvc.perform(post("/createReservation").contentType(MediaType.APPLICATION_JSON_VALUE).content(
+				"{\"firstName\" : \"anuj\", \"lastName\" : \"sharma\", \"email\" : \"anuj@gmail.com\", \"startDate\" : \"2021-03-26\", \"durationInDays\": 2}"))
+				.andExpect(status().isOk());
 	}
 
 	@Test
@@ -86,11 +84,9 @@ public class CampsiteControllerTest {
 		Mockito.when(campsiteService.createReservation(Mockito.anyObject()))
 				.thenThrow(GivenDateRangeAlreadyReservedException.class);
 
-		this.mockMvc
-			.perform(post("/createReservation")
-			.contentType(MediaType.APPLICATION_JSON_VALUE)
-			.content("{\"firstName\" : \"anuj\", \"lastName\" : \"sharma\", \"email\" : \"anuj@gmail.com\", \"startDate\" : \"2021-03-26\", \"durationInDays\": 2}"))
-			.andExpect(status().isBadRequest());
+		this.mockMvc.perform(post("/createReservation").contentType(MediaType.APPLICATION_JSON_VALUE).content(
+				"{\"firstName\" : \"anuj\", \"lastName\" : \"sharma\", \"email\" : \"anuj@gmail.com\", \"startDate\" : \"2021-03-26\", \"durationInDays\": 2}"))
+				.andExpect(status().isBadRequest());
 	}
 
 	@Test
@@ -98,11 +94,9 @@ public class CampsiteControllerTest {
 		Mockito.when(campsiteService.createReservation(Mockito.anyObject()))
 				.thenThrow(ObjectOptimisticLockingFailureException.class);
 
-		this.mockMvc
-			.perform(post("/createReservation")
-			.contentType(MediaType.APPLICATION_JSON_VALUE)
-			.content("{\"firstName\" : \"anuj\", \"lastName\" : \"sharma\", \"email\" : \"anuj@gmail.com\", \"startDate\" : \"2021-03-26\", \"durationInDays\": 2}"))
-			.andExpect(status().isConflict());
+		this.mockMvc.perform(post("/createReservation").contentType(MediaType.APPLICATION_JSON_VALUE).content(
+				"{\"firstName\" : \"anuj\", \"lastName\" : \"sharma\", \"email\" : \"anuj@gmail.com\", \"startDate\" : \"2021-03-26\", \"durationInDays\": 2}"))
+				.andExpect(status().isConflict());
 	}
 
 	@Test
@@ -110,11 +104,8 @@ public class CampsiteControllerTest {
 		Mockito.doThrow(new ReservationIdDoesNotExistException(1L)).when(campsiteService)
 				.cancelReservation(Mockito.anyLong());
 
-		this.mockMvc
-			.perform(post("/cancelReservation")
-			.contentType(MediaType.APPLICATION_JSON_VALUE)
-			.content("{\"reservationId\" : 3}"))
-			.andExpect(status().isNotFound());
+		this.mockMvc.perform(post("/cancelReservation").contentType(MediaType.APPLICATION_JSON_VALUE)
+				.content("{\"reservationId\" : 3}")).andExpect(status().isNotFound());
 	}
 
 }

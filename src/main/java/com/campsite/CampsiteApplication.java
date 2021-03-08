@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class CampsiteApplication {
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(CampsiteApplication.class, args);
 	}
