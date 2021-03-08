@@ -34,6 +34,10 @@ import lombok.ToString;
 @ToString
 public class Reservation {
 
+	/*
+	 * TODO : Should have a UUID (Unique) which can be returned to the user as the reservation
+	 * identifier rather than sending the id as the reservation identifier
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
 	@GenericGenerator(name = "native", strategy = "native")

@@ -67,15 +67,13 @@ public class CampsiteService {
 	}
 
 	@Transactional
-	public void createReservation(ReservationCreationRequest reservationCreationRequest) {
-		logger.info("ReservationCreationRequest = {}", reservationCreationRequest);
+	public Reservation createReservation(ReservationCreationRequest reservationCreationRequest) {
 		LocalDate startDate = reservationCreationRequest.getStartDate();
 		LocalDate endDate = reservationCreationRequest.getStartDate()
 				.plusDays(reservationCreationRequest.getDurationInDays());
 		List<CampsiteAvailability> lCampsiteAvailability = availabilityRepository
 				.getAllBetweenDatesNotBindedToAnyReservation(startDate, endDate);
 		if (lCampsiteAvailability.size() != (reservationCreationRequest.getDurationInDays() + 1)) {
-			System.out.println(lCampsiteAvailability);
 			throw new GivenDateRangeAlreadyReservedException();
 		}
 		Reservation reservation = new Reservation();
@@ -88,7 +86,7 @@ public class CampsiteService {
 		}
 		reservation.setReservationStatus(ReservationStatus.BOOKED);
 		reservation.setStartDate(convert(startDate));
-		reservationRepository.save(reservation);
+		return reservationRepository.save(reservation);
 	}
 
 	@Transactional

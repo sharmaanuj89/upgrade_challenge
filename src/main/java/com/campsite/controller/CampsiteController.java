@@ -3,6 +3,7 @@ package com.campsite.controller;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.campsite.model.Reservation;
 import com.campsite.request.ReservationCancellationRequest;
 import com.campsite.request.ReservationCreationRequest;
 import com.campsite.request.ReservationModificationRequest;
+import com.campsite.response.CreateReservationResponse;
 import com.campsite.response.ExistingSchedulesResponse;
 import com.campsite.service.CampsiteService;
 
@@ -32,9 +35,11 @@ public class CampsiteController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/createReservation", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> createReservation(@RequestBody ReservationCreationRequest reservationCreationRequest) {
-		campsiteService.createReservation(reservationCreationRequest);
-		return ResponseEntity.ok().build();
+	public ResponseEntity<CreateReservationResponse> createReservation(@RequestBody ReservationCreationRequest reservationCreationRequest) {
+		Reservation reservation = campsiteService.createReservation(reservationCreationRequest);
+		CreateReservationResponse response = new CreateReservationResponse();
+		response.setReservationId(reservation.getId());
+		return new ResponseEntity<CreateReservationResponse>(response, HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/modifyReservation")
