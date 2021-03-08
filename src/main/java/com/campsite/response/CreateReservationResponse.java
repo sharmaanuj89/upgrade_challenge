@@ -13,8 +13,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class CreateReservationResponse implements Serializable{
-	
+public class CreateReservationResponse implements Serializable {
+
 	/**
 	 * 
 	 */

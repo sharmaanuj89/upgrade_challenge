@@ -25,7 +25,7 @@ public class ExistingSchedulesResponse {
 	@AllArgsConstructor
 	@EqualsAndHashCode
 	@ToString
-	public static class Availablility{
+	public static class Availablility {
 		private LocalDate availabilityDate;
 		private boolean isBooked;
 	}

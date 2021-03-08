@@ -35,8 +35,9 @@ import lombok.ToString;
 public class Reservation {
 
 	/*
-	 * TODO : Should have a UUID (Unique) which can be returned to the user as the reservation
-	 * identifier rather than sending the id as the reservation identifier
+	 * TODO : Should have a UUID (Unique) which can be returned to the user as the
+	 * reservation identifier rather than sending the id as the reservation
+	 * identifier
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
@@ -51,11 +52,11 @@ public class Reservation {
 
 	@Column(name = "last_name")
 	private String lastName;
-	
+
 	@Column(name = "start_date")
 	@Temporal(TemporalType.DATE)
 	private Date startDate;
-	
+
 	@Column(name = "end_date")
 	@Temporal(TemporalType.DATE)
 	private Date endDate;
@@ -66,20 +67,20 @@ public class Reservation {
 
 	@OneToMany(mappedBy = "reservation", fetch = FetchType.LAZY)
 	private List<CampsiteAvailability> lCampsiteAvailability = new ArrayList<CampsiteAvailability>();
-	
+
 	public void addCampsiteAvailability(CampsiteAvailability campsiteAvailability) {
 		lCampsiteAvailability.add(campsiteAvailability);
 		campsiteAvailability.setReservation(this);
-    }
-	
+	}
+
 	public void removeCampsiteAvailability(CampsiteAvailability campsiteAvailability) {
 		lCampsiteAvailability.remove(campsiteAvailability);
 		campsiteAvailability.setReservation(null);
-    }
-	
+	}
+
 	public void removeAllAvailability() {
 		java.util.Iterator<CampsiteAvailability> it = lCampsiteAvailability.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			CampsiteAvailability c = it.next();
 			it.remove();
 			c.setReservation(null);

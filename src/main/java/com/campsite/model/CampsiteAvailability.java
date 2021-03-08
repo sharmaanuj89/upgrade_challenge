@@ -31,21 +31,22 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 public class CampsiteAvailability {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
 	@GenericGenerator(name = "native", strategy = "native")
 	private Long id;
-	
+
 	@Column(name = "availability_date")
 	@Temporal(TemporalType.DATE)
 	private Date availabilityDate;
-	
+
+	// Used for optimistic locking
 	@Version
 	@Column(name = "version")
-    private int version;
-	
+	private int version;
+
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "reservation_id")
+	@JoinColumn(name = "reservation_id")
 	private Reservation reservation;
 }

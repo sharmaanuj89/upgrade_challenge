@@ -12,9 +12,8 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 public class CampsiteError {
-	
+
 	private Integer errorCode;
 	private String errorDescription;
-	
 
 }

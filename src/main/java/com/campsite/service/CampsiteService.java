@@ -41,7 +41,7 @@ public class CampsiteService {
 
 	@Autowired
 	private ReservationRepository reservationRepository;
-	
+
 	@Transactional
 	public ExistingSchedulesResponse findExistingScehdules(LocalDate startDate, LocalDate endDate) {
 		if (startDate != null && endDate != null) {
@@ -103,14 +103,15 @@ public class CampsiteService {
 		LocalDate startDate = reservationModificationRequest.getStartDate();
 		LocalDate endDate = reservationModificationRequest.getStartDate()
 				.plusDays(reservationModificationRequest.getDurationInDays());
-		Map<Long, CampsiteAvailability> reservedCampsite = reservation.getLCampsiteAvailability().stream().collect(Collectors.toMap(CampsiteAvailability::getId, Function.identity()));
+		Map<Long, CampsiteAvailability> reservedCampsite = reservation.getLCampsiteAvailability().stream()
+				.collect(Collectors.toMap(CampsiteAvailability::getId, Function.identity()));
 		List<CampsiteAvailability> lCampsiteAvailability = availabilityRepository.getAllBetweenDates(startDate,
 				endDate);
 		for (CampsiteAvailability campsiteAvailability : lCampsiteAvailability) {
 			if (campsiteAvailability.getReservation() != null) {
 				if (!campsiteAvailability.getReservation().getId().equals(reservation.getId())) {
 					throw new GivenDateRangeAlreadyReservedException();
-				}else {
+				} else {
 					reservedCampsite.remove(campsiteAvailability.getId());
 				}
 			} else {
@@ -118,7 +119,7 @@ public class CampsiteService {
 			}
 		}
 		for (Entry<Long, CampsiteAvailability> entry : reservedCampsite.entrySet()) {
-		   reservation.removeCampsiteAvailability(entry.getValue());
+			reservation.removeCampsiteAvailability(entry.getValue());
 		}
 		reservation.setStartDate(convert(startDate));
 		reservation.setEndDate(convert(endDate));

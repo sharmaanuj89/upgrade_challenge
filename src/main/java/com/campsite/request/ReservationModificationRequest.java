@@ -24,8 +24,8 @@ public class ReservationModificationRequest {
 	private LocalDate startDate;
 
 	@NotNull
-	@Min(1)
-	@Max(3)
+	@Min(0)
+	@Max(2)
 	private Integer durationInDays;
 
 }
